@@ -1,0 +1,2 @@
+url="https://adpqrnhnwqcxsdnfurge.supabase.co"
+api="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFkcHFybmhud3FjeHNkbmZ1cmdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg0ODE2NzMsImV4cCI6MjA0NDA1NzY3M30.QRJF1wUtZjtGTGmRNjIdniTZ0LvX48SYMYwhBOkceiA"
