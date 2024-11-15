@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import Link from 'next/link'
 import { Text, Title, Grid, Paper, Button, Space, Image } from '@mantine/core'
@@ -34,7 +36,9 @@ export default function Card({ title, image, description, button, redirect, numC
               <Space h="sm" />
               <Text>{description}</Text>
               <Space h="sm" />
-              <Button>{button}</Button>
+              <Link href={redirect}>
+                <Button>{button}</Button>
+              </Link>
             </Grid.Col>
           </Grid>
         </Paper>

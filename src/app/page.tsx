@@ -1,15 +1,6 @@
 'use client'
 
-import {
-  AppShell,
-  AppShellHeader,
-  AppShellMain,
-  AppShellNavbar,
-  Burger,
-  Title,
-  Grid,
-  Space,
-} from '@mantine/core'
+import { AppShell, AppShellHeader, AppShellMain, Burger, Title, Grid, Space } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import Link from 'next/link'
 import Card from './components/Card'
@@ -43,23 +34,13 @@ export default function Home() {
   let iteml2 = '/exmarket1/item1'
 
   return (
-    <AppShell
-      header={{ height: 120 }}
-      navbar={{
-        width: 300,
-        breakpoint: 'sm',
-        collapsed: { mobile: !opened },
-      }}
-      padding="md"
-    >
+    <AppShell header={{ height: 120 }} padding="md">
       <AppShellHeader>
         <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
         <Title size={56} style={{ color: '#699B60', paddingTop: 20, paddingLeft: 30 }}>
           <Link href="/">Domanu</Link>
         </Title>
       </AppShellHeader>
-
-      <AppShellNavbar p="md">Navbar</AppShellNavbar>
 
       <AppShellMain>
         <div style={{ textAlign: 'center' }}>
