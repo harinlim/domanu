@@ -4,6 +4,7 @@ import bcrypt
 from fastapi import FastAPI
 from app.models import User
 from db.supabase import create_supabase_client
+import json
 
 app = FastAPI()
 
@@ -46,6 +47,20 @@ def sign_in(user: User):
         print("Error: ", e)
         return {"message": "User could not be signed in"}
     
+@app.get("/session")
+def get_session():
+    try:
+        response = supabase.auth.get_session()
+
+        if response:
+            return {"message": response}
+        else:
+            return {"message": "User could not be signed in"}
+    except Exception as e:
+        print("Error:", e)
+        return {"message": "Session data cannot be retrieved"}
+
+    
 # Sign out existing user
 @app.get("/sign-out")
 def sign_out():
@@ -56,7 +71,7 @@ def sign_out():
         return {"message": "User could not be signed out"}
     
 
-@app.get("/retrieve-user-email")
+@app.get("/retrieve-user")
 def user_exists():
     try:
         response = supabase.auth.get_user() # need to convert output to JSON for access to email
@@ -68,9 +83,22 @@ def user_exists():
     except Exception as e:
         print("Error: ", e)
         return {"message": e}
+    
+@app.get("/retrieve-user-id")
+def user_id():
+    try:
+        response = supabase.auth.get_user() # need to convert output to JSON for access to email
 
-@app.put("/update-password")
-def update_password(email: str):
+        if response:
+            return {"message": f"{response}"} 
+        else:
+            return {"message": "User could not be found"}
+    except Exception as e:
+        print("Error: ", e)
+        return {"message": e}
+
+@app.put("/update-email")
+def update_email(email: str):
     try:
         response = supabase.auth.update_user({
             "email": email.lower()})
@@ -89,9 +117,16 @@ def update_password(password: str):
         response = supabase.auth.update_user({"password": password})
 
         if response:
-            return {"message": f"Email updated"} 
+            return {"message": f"Password updated"} 
         else:
-            return {"message": "Could not update email"}
+            return {"message": "Could not update password"}
     except Exception as e:
         print("Error: ", e)
         return {"message": e}
+    
+# @app.delete("/delete-user")
+# def delete_user():
+#     try:
+#         supabase.auth.admin.delete_user(user_exists[])
+    
+#         return {"message": "User deleted "}
