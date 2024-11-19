@@ -1,6 +1,6 @@
 import pytest
 from app.auth import *
-from models import User
+from app.models import User
 
 
 def test_create_user():

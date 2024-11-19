@@ -7,17 +7,10 @@ class User(BaseModel):
     email: str
     password: str
 
-class Marketplace(BaseModel):
-    id: Optional[int] = None
-    name: str
-    description: str
-    private: bool
-    type: str
-    owner: Optional[int] = None
 
-class Services(BaseModel):
-    id: Optional[int] = None
-    marketplace: Optional[int] = None
-    title: str
-    description: str
-    seller: Optional[int] = None
+class Profile(BaseModel):
+    #id: Optional[int] = None
+    first: str
+    last: str
+    username: str
+    #designer: b
