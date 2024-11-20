@@ -17,7 +17,7 @@ openapi_tags = {
     "description": "Modify and create user profiles",
 }
 
-# Create a new user
+# Update a new profile connected to user
 @api.post("/update-user", tags=["profiles"])
 def update_profile(profile: Profile):
     try:
@@ -30,6 +30,30 @@ def update_profile(profile: Profile):
         response = (
         supabase.table("profiles")
         .update(user)
+        .eq("id", id)
+        .execute()
+        )
+
+        if response:
+            return {"message": f"{response}"} 
+        else:
+            return {"message": "User could not be found"}
+    except Exception as e:
+        print("Error: ", e)
+        return {"message": e}
+    
+
+@api.post("/make-designer", tags=["profiles"])
+def make_designer():
+    try:
+        try:
+            id = uuid.UUID(user_id()['message'])  # Convert to UUID
+        except ValueError:
+            raise ValueError("Invalid UUID format for user ID")
+
+        response = (
+        supabase.table("profiles")
+        .update({"designer": True})
         .eq("id", id)
         .execute()
         )
@@ -108,6 +132,30 @@ def get_last_name():
 
         if response:
             return {"message": f"{response.data[0]['last_name']}"} 
+        else:
+            return {"message": "User could not be found"}
+    except Exception as e:
+        print("Error: ", e)
+        return {"message": e}
+    
+
+@api.get("/get_designer", tags=["profiles"])
+def get_designer_value():
+    try:
+        try:
+            id = uuid.UUID(user_id()['message'])  # Convert to UUID
+        except ValueError:
+            raise ValueError("Invalid UUID format for user ID")
+
+        response = (
+            supabase.table("profiles")
+            .select("designer")
+            .eq("id", id)
+            .execute()
+        )
+
+        if response:
+            return {"message": f"{response.data[0]['designer']}"} 
         else:
             return {"message": "User could not be found"}
     except Exception as e:

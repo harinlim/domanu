@@ -9,8 +9,13 @@ class User(BaseModel):
 
 
 class Profile(BaseModel):
-    #id: Optional[int] = None
     first: str
     last: str
     username: str
-    #designer: b
+
+class Marketplace(BaseModel):
+    name: str
+    description: str
+    bidding: bool
+    bargaining: bool
+    private: bool
