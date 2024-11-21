@@ -19,3 +19,10 @@ class Marketplace(BaseModel):
     bidding: bool
     bargaining: bool
     private: bool
+
+class Services(BaseModel):
+    name: str
+    description: str
+    price: float
+    active: bool
+    marketplace_id: int

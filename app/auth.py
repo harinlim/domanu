@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, FastAPI
 from app.models import User
 from db.supabase import create_supabase_client
 import json
+import uuid
 
 # Initialize supabase client
 supabase = create_supabase_client()
@@ -130,9 +131,17 @@ def update_password(password: str):
         print("Error: ", e)
         return {"message": e}
     
-# @api.delete("/delete-user", tags=["auth"])
-# def delete_user():
-#     try:
-#         supabase.auth.admin.delete_user(user_exists[])
+@api.delete("/delete-user", tags=["auth"])
+def delete_user():
+    try:
+        try:
+            id = uuid.UUID(user_id()['message'])  # Convert to UUID
+        except ValueError:
+            raise ValueError("Invalid UUID format for user ID")
+        
+        supabase.auth.admin.delete_user(id)
     
-#         return {"message": "User deleted "}
+        return {"message": "User deleted "}
+    except Exception as e:
+        print("Error: ", e)
+        return {"message": e}

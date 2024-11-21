@@ -1,35 +1,34 @@
 from typing import Union
 
 from fastapi import APIRouter, Depends, HTTPException, FastAPI
-from app.models import User, Profile, Marketplace
+from app.models import User, Profile, Marketplace, Services
 from db.supabase import create_supabase_client
 from app.auth import user_id
-from app.profiles import get_designer_value
+from app.profiles import get_designer_value, get_marketplaces
 import uuid
 
 # Initialize supabase client
 supabase = create_supabase_client()
 
-api = APIRouter(prefix="/marketplaces")
+api = APIRouter(prefix="/services")
 
 openapi_tags = {
-    "name": "marketplaces",
-    "description": "Modify and create marketplaces",
+    "name": "services",
+    "description": "Modify and create services",
 }
 
 # Create a new user
-@api.post("/create-marketplace", tags=["marketplaces"])
-def create_marketplace(marketplace: Marketplace):
+@api.post("/create-service", tags=["services"])
+def create_marketplace(service: Services):
     try:
 
-        if get_designer_value()["message"] == "True":
-            marketplace_struct = {"name": marketplace.name, "description": marketplace.description, "designer": user_id()['message'], "bidding": marketplace.bidding, "bargaining":marketplace.bargaining, "private": marketplace.private}
+        if str(service.marketplace_id) in get_marketplaces()['message']:
+            service_struct = {"name": service.name, "description": service.description, "price": service.price, "seller": user_id()['message'], "marketplace": service.marketplace_id, "active": service.active}
             response = (
-            supabase.table("marketplaces")
-            .insert(marketplace_struct)
+            supabase.table("services")
+            .insert(service_struct)
             .execute()
         )
-            
             if response:
                 return {"message": f"{response}"} 
             else:
@@ -44,25 +43,26 @@ def create_marketplace(marketplace: Marketplace):
         return {"message": e}
     
 
-@api.get("/get-marketplaces", tags=["marketplaces"])
-def get_marketplaces():
+@api.get("/get-services", tags=["services"])
+def get_services():
     try:
+
         try:
             id = uuid.UUID(user_id()['message'])  # Convert to UUID
         except ValueError:
             raise ValueError("Invalid UUID format for user ID")
 
         response = (
-            supabase.table("marketplaces")
+            supabase.table("services")
             .select("*")
-            .eq("designer", id)
+            .eq("seller", id)
             .execute()
         )
 
         if response:
             return {"message": f"{response}"} 
         else:
-            return {"message": "Marketplace could not be found"}
+            return {"message": "Services could not be found"}
     except Exception as e:
         print("Error: ", e)
         return {"message": e}

@@ -185,3 +185,61 @@ def get_user_profile():
     except Exception as e:
         print("Error: ", e)
         return {"message": e}
+    
+@api.get("/get_member_marketplaces", tags=["profiles"])
+def get_marketplaces():
+    try:
+        try:
+            id = uuid.UUID(user_id()['message'])  # Convert to UUID
+        except ValueError:
+            raise ValueError("Invalid UUID format for user ID")
+
+        response = (
+            supabase.table("profiles")
+            .select("member_marketplaces")
+            .eq("id", id)
+            .execute()
+        )
+
+        if response:
+            print(type(response.data[0]['member_marketplaces']))
+            return {"message": f"{response.data[0]['member_marketplaces']}"} 
+        else:
+            return {"message": "User could not be found"}
+    except Exception as e:
+        print("Error: ", e)
+        return {"message": e}
+
+@api.get("/join_marketplaces", tags=["profiles"])
+def join_marketplaces(marketplace_id: int):
+    try:
+        try:
+            id = uuid.UUID(user_id()['message'])  # Convert to UUID
+        except ValueError:
+            raise ValueError("Invalid UUID format for user ID")
+
+        # Fetch the current member_marketplace list
+        profile = supabase.table("profiles").select("member_marketplaces").eq("id", id).single().execute()
+        if not profile.data:
+            return {"message": "User profile not found"}
+
+        # Get existing list or initialize it
+        current_marketplaces = profile.data.get("member_marketplaces") or []
+        if marketplace_id in current_marketplaces:
+            return {"message": "Already a member of this marketplace"}
+
+        # Append the new marketplace_id to the array
+        response = (
+            supabase.table("profiles")
+            .update({"member_marketplaces": current_marketplaces + [marketplace_id]})
+            .eq("id", id)
+            .execute()
+        )
+
+        if response:
+            return {"message": f"Marketplace joined"} 
+        else:
+            return {"message": "User could not be found"}
+    except Exception as e:
+        print("Error: ", e)
+        return {"message": e}
