@@ -1,12 +1,10 @@
 'use client'
 
-import { AppShell, AppShellHeader, AppShellMain, Burger, Title, Grid, Space } from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
-import Link from 'next/link'
+import { AppShell, AppShellMain, Title, Grid, Space } from '@mantine/core'
 import Card from './components/Card'
+import Header from './components/Header'
 
 export default function Home() {
-  const [opened, { toggle }] = useDisclosure()
   let title1 = 'UNC Students Help'
   let img1 = 'unc.jpg'
   let desc1 =
@@ -35,12 +33,7 @@ export default function Home() {
 
   return (
     <AppShell header={{ height: 120 }} padding="md">
-      <AppShellHeader>
-        <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-        <Title size={56} style={{ color: '#699B60', paddingTop: 20, paddingLeft: 30 }}>
-          <Link href="/">Domanu</Link>
-        </Title>
-      </AppShellHeader>
+      {Header()}
 
       <AppShellMain>
         <div style={{ textAlign: 'center' }}>

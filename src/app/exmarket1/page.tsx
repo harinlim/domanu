@@ -1,26 +1,15 @@
 'use client'
 
 import React from 'react'
-import Link from 'next/link'
-import {
-  AppShell,
-  AppShellHeader,
-  AppShellMain,
-  Burger,
-  Grid,
-  Title,
-  Space,
-  Image,
-  Text,
-} from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
+import { AppShell, AppShellMain, Grid, Title, Space, Image, Text } from '@mantine/core'
 import '@mantine/core/styles.css'
 import Card from '../components/Card'
+import Header from '../components/Header'
 
 function ExMarket1() {
   let card = Card({
     title: 'Ride Share Service',
-    image: 'drive.jpg',
+    image: '/drive.jpg',
     description:
       'Rides over time to get to any location within 10 miles of Chapel Hill. Car can seat 1-4 passengers excluding driver.',
     button: 'Bid',
@@ -28,16 +17,9 @@ function ExMarket1() {
     numCol: 3,
   })
 
-  const [opened, { toggle }] = useDisclosure()
-
   return (
     <AppShell header={{ height: 120 }} padding="md">
-      <AppShellHeader>
-        <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-        <Title size={56} style={{ color: '#699B60', paddingTop: 20, paddingLeft: 30 }}>
-          <Link href="/">Domanu</Link>
-        </Title>
-      </AppShellHeader>
+      {Header()}
 
       <AppShellMain>
         <Grid style={{ paddingLeft: 72, paddingTop: 20, paddingRight: 72 }}>
@@ -46,7 +28,7 @@ function ExMarket1() {
               <Grid.Col span={3}>
                 <Image
                   radius="md"
-                  src={'unc.jpg'}
+                  src={'/unc.jpg'}
                   w="100%"
                   style={{
                     aspectRatio: '1/1',

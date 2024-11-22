@@ -1,42 +1,24 @@
 'use client'
 
 import React from 'react'
-import Link from 'next/link'
-import {
-  AppShell,
-  AppShellHeader,
-  AppShellMain,
-  Burger,
-  Grid,
-  Title,
-  Space,
-  Image,
-  Text,
-} from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
+import { AppShell, AppShellMain, Grid, Title, Space, Image, Text } from '@mantine/core'
 import '@mantine/core/styles.css'
 import Card from '../components/Card'
+import Header from '../components/Header'
 
 function ExMarket2() {
   let card = Card({
     title: 'Barber',
-    image: 'barber.jpg',
+    image: '/barber.jpg',
     description: 'Haircut service. Cuts for men and women, all hair textures.',
     button: 'Bid',
     redirect: '/exmarket2/item1',
     numCol: 3,
   })
 
-  const [opened, { toggle }] = useDisclosure()
-
   return (
     <AppShell header={{ height: 120 }} padding="md">
-      <AppShellHeader>
-        <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-        <Title size={56} style={{ color: '#699B60', paddingTop: 20, paddingLeft: 30 }}>
-          <Link href="/">Domanu</Link>
-        </Title>
-      </AppShellHeader>
+      {Header()}
 
       <AppShellMain>
         <Grid style={{ paddingLeft: 72, paddingTop: 20, paddingRight: 72 }}>

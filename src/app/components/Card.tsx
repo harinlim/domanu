@@ -9,8 +9,8 @@ interface CardProps {
   title: string
   image: string
   description: string
-  button: string
-  redirect: string
+  button: string | null
+  redirect: string | null
   numCol: number
 }
 
@@ -34,11 +34,13 @@ export default function Card({ title, image, description, button, redirect, numC
             <Grid.Col span={9}>
               <Title order={4}>{title}</Title>
               <Space h="sm" />
-              <Text>{description}</Text>
+              <Text style={{ whiteSpace: 'pre-line' }}>{description}</Text>
               <Space h="sm" />
-              <Link href={redirect}>
-                <Button>{button}</Button>
-              </Link>
+              {button != null ? (
+                <Link href={redirect}>
+                  <Button>{button}</Button>
+                </Link>
+              ) : null}
             </Grid.Col>
           </Grid>
         </Paper>

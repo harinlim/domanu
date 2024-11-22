@@ -1,39 +1,21 @@
 'use client'
 
 import React from 'react'
-import Link from 'next/link'
-import {
-  AppShell,
-  AppShellHeader,
-  AppShellMain,
-  Burger,
-  Grid,
-  Title,
-  Space,
-  Image,
-  Text,
-} from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
+import { AppShell, AppShellMain, Grid, Title, Space, Image, Text } from '@mantine/core'
 import '@mantine/core/styles.css'
+import Header from '../../components/Header'
 
 function Item1() {
-  const [opened, { toggle }] = useDisclosure()
-
   return (
     <AppShell header={{ height: 120 }} padding="md">
-      <AppShellHeader>
-        <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-        <Title size={56} style={{ color: '#699B60', paddingTop: 20, paddingLeft: 30 }}>
-          <Link href="/">Domanu</Link>
-        </Title>
-      </AppShellHeader>
+      {Header()}
 
       <AppShellMain>
         <Grid style={{ paddingLeft: 72, paddingTop: 20, paddingRight: 72 }}>
           <Grid.Col span={1}>
             <Image
               radius="md"
-              src={'../barber.jpg'}
+              src={'/barber.jpg'}
               w="100%"
               style={{
                 aspectRatio: '1/1',
