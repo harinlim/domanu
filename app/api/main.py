@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from app.auth import api as auth_router
-from app.profiles import api as profiles_router
-from app.marketplace import api as marketplace_router
-from app.services import api as service_router
+from app.api.auth import api as auth_router
+from app.api.profiles import api as profiles_router
+from app.api.marketplace import api as marketplace_router
+from app.api.services import api as service_router
 
 app = FastAPI()
 
