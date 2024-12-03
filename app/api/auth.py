@@ -131,17 +131,3 @@ def update_password(password: str):
         print("Error: ", e)
         return {"message": e}
     
-# @api.delete("/delete-user", tags=["auth"])
-# def delete_user():
-#     try:
-#         try:
-#             id = uuid.UUID(user_id()['message'])  # Convert to UUID
-#         except ValueError:
-#             raise ValueError("Invalid UUID format for user ID")
-        
-#         supabase.auth.admin.delete_user(id)
-    
-#         return {"message": "User deleted "}
-#     except Exception as e:
-#         print("Error: ", e)
-#         return {"message": e}
