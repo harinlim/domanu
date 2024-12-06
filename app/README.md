@@ -1,10 +1,16 @@
 # Database Integration Documentation
 
+To test the API routes manually run this command in the terminal: `uvicorn app.api.main:app --reload`
+
+Then open this address in the browser: `http://127.0.0.1:8000/docs`
+
+Depending on the port the application is running out of the url may change, but any changes to the address will generate when the uvicorn server is started.
+
 The database for Domanu is hosted using Supabase. This platform has built in authentication and allows for implementation across multiple languages, including Python - which is what Domanu's backend is built in. The existing databases have been constructed using the console in Supabase and the current version of Domanu has API's necessary for authentication, user profiles, marketplaces, and services.
 
 ## Authentication
 
-The authentication API's are stored in auth.py and allow the application to communicate with the auth users database stored on Supabase.
+The authentication API's are stored in auth.py and allow the application to communicate with the auth users database stored on Supabase. Various permissions for user data will be limited to the admin profile. 
 
 `create_user` allows for the creation of new users via email and stores their email and password. Users receive a unique id and this id will follow them across the entire platform to create their profiles and manage anything that pertains to their account on the site. This function will also send a confirmation email to registrants from the domanu.com email.
 
