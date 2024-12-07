@@ -53,6 +53,7 @@ def sign_in(user: User):
     except Exception as e:
         print("Error: ", e)
         return {"message": "User could not be signed in"}
+
     
 @api.get("/session", tags=["auth"])
 def get_session():
