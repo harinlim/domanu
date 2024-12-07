@@ -60,9 +60,42 @@ def get_marketplaces():
         )
 
         if response:
-            return {"message": f"{response}"} 
+            return {
+                "status": "success",
+                "data": response.data,  # This is already a list of dictionaries
+                "count": len(response.data)
+            }
         else:
-            return {"message": "Marketplace could not be found"}
+            return {
+                "status": "error",
+                "message": "No marketplaces found",
+                "data": []
+            }
     except Exception as e:
         print("Error: ", e)
-        return {"message": e}
+        return {
+            "status": "error",
+            "message": str(e),
+            "data": []
+        }
+
+@api.get("/{marketplace_id}", tags=["marketplaces"])
+def get_marketplace(marketplace_id: int):
+    try:
+        response = (
+            supabase.table("marketplaces")
+            .select("*")
+            .eq("id", marketplace_id)
+            .single()
+            .execute()
+        )
+        
+        if response.data:
+            return {
+                "status": "success",
+                "data": response.data
+            }
+        return {"status": "error", "message": "Marketplace not found"}
+    except Exception as e:
+        print("Error: ", e)
+        return {"status": "error", "message": str(e)}

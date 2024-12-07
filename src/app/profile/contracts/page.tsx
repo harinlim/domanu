@@ -3,24 +3,20 @@
 import { AppShell, AppShellMain, Title, Stack, Grid, Text, Space } from '@mantine/core'
 import Header from '../../components/Header'
 import NavBar from '../../components/NavBar'
-import Card from '../../components/Card'
+import Card from '../../components/MarketplaceCard'
 
 export default function Profile() {
   let service1 = Card({
     title: 'Ride Share Service',
     image: '/drive.jpg',
     description: 'Frequency: Weekly\nSessions left: 4\nDuration left: 1 month',
-    button: 'View',
-    redirect: '',
-    numCol: 1,
+    id: 1,
   })
   let service2 = Card({
     title: 'Barber',
     image: '/barber.jpg',
     description: 'Frequency: Every 2 months\nSessions left: 12\nDuration left: 2 years',
-    button: 'View',
-    redirect: '',
-    numCol: 1,
+    id: 2,
   })
 
   return (

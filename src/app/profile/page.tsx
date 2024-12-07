@@ -3,24 +3,20 @@
 import { AppShell, AppShellMain, Title, Image, Grid, Text, Space } from '@mantine/core'
 import Header from '../components/Header'
 import NavBar from '../components/NavBar'
-import Card from '../components/Card'
+import Card from '../components/MarketplaceCard'
 
 export default function Profile() {
   let review1 = Card({
     title: 'Great seller!',
     image: '/profile-pic2.jpg',
     description: 'domanu123 gave me some awesome haircuts! Highly recommend!',
-    button: null,
-    redirect: null,
-    numCol: 3,
+    id: 1,
   })
   let review2 = Card({
     title: 'Love her manicures!',
     image: '/profile-pic3.jpg',
     description: 'She was very nice and I got so many compliments on my nails :)',
-    button: null,
-    redirect: null,
-    numCol: 3,
+    id: 2,
   })
 
   return (

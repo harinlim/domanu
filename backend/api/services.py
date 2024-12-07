@@ -156,3 +156,24 @@ def delete_service(service_id: int):
     except Exception as e:
         print("Error: ", e)
         return {"message": e}
+
+@api.get("/marketplace/{marketplace_id}", tags=["services"])
+def get_marketplace_services(marketplace_id: int):
+    try:
+        response = (
+            supabase.table("services")
+            .select("*")
+            .eq("marketplace", marketplace_id)
+            .eq("active", True)
+            .execute()
+        )
+        
+        if response.data:
+            return {
+                "status": "success",
+                "data": response.data
+            }
+        return {"status": "success", "data": []}
+    except Exception as e:
+        print("Error: ", e)
+        return {"status": "error", "message": str(e)}

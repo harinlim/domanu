@@ -1,13 +1,25 @@
 'use client'
 
-import { Text, TextInput, PasswordInput, Checkbox, Group, Button, Alert } from '@mantine/core'
+import {
+  TextInput,
+  PasswordInput,
+  Checkbox,
+  Group,
+  Button,
+  Alert,
+  Anchor,
+  Box,
+  Text,
+} from '@mantine/core'
 import { useForm, zodResolver } from '@mantine/form'
 import { IconAlertCircle } from '@tabler/icons-react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-// import { login } from '../actions'
-import { loginSchema } from '../schemas'
+// import { signup } from '../actions'
+import { signupSchema } from '../schemas'
+import { login } from '../actions'
 
 export function LoginForm() {
   const form = useForm({
@@ -17,7 +29,7 @@ export function LoginForm() {
       password: '',
       remember: false,
     },
-    validate: zodResolver(loginSchema),
+    validate: zodResolver(signupSchema),
     clearInputErrorOnChange: true,
   })
 
@@ -26,35 +38,24 @@ export function LoginForm() {
 
   const router = useRouter()
 
-  const handleSubmit = form.onSubmit(async values => {
+  const handleSubmit = form.onSubmit(async (values) => {
     setIsSubmitting(true)
-    // const result = await login(values)
+    const result = await login(values)
 
-    // if (result.success) {
-    //   setError('')
-
-    //   router.push('/')
-    //   return
-    // }
+    if (result.success) {
+      setError('')
+      router.push('/signup/success')
+      return
+    }
 
     setIsSubmitting(false)
 
-    // if (result.fieldErrors) {
-    //   setError('')
-    //   form.setErrors({
-    //     identifier: result.fieldErrors.identifier?.join('. '),
-    //     password: result.fieldErrors.password?.join('. '),
-    //   })
-    //   return
-    // }
+    if (result.error) {
+      setError(result.error)
+      return
+    }
 
-    // if (result.error) {
-    //   setError(result.error)
-    //   return
-    // }
-
-    setError('Failed to login. Please try again later.')
-    // console.error(result)
+    setError('Failed to sign up. Please try again later.')
   })
 
   return (
@@ -72,10 +73,10 @@ export function LoginForm() {
         />
       )}
       <TextInput
-        label="Username or email"
-        placeholder="Username or email@example.com"
-        key={form.key('identifier')}
-        {...form.getInputProps('identifier')}
+        label="Email"
+        placeholder="Your email"
+        key={form.key('email')}
+        {...form.getInputProps('email')}
       />
       <PasswordInput
         label="Password"
@@ -96,7 +97,7 @@ export function LoginForm() {
     </Anchor> */}
       </Group>
       <Button type="submit" disabled={isSubmitting} className="mt-5 h-11 w-full bg-blue-600">
-        <Text className="text-sm font-medium">Sign in</Text>
+        <Text className="text-sm font-medium">Sign up</Text>
       </Button>
     </form>
   )

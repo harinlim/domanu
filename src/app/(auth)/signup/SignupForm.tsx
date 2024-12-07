@@ -19,6 +19,7 @@ import { useState } from 'react'
 
 // import { signup } from '../actions'
 import { signupSchema } from '../schemas'
+import { signup } from '../actions'
 
 export function SignupForm() {
   const form = useForm({
@@ -40,34 +41,22 @@ export function SignupForm() {
 
   const handleSubmit = form.onSubmit(async values => {
     setIsSubmitting(true)
-    // const result = await signup(values)
+    const result = await signup(values)
 
-    // if (result.success) {
-    //   setError('')
-
-    //   router.push('/signup/success')
-    //   return
-    // }
+    if (result.success) {
+      setError('')
+      router.push('/signup/success')
+      return
+    }
 
     setIsSubmitting(false)
 
-    // if (result.fieldErrors) {
-    //   setError('')
-    //   form.setErrors({
-    //     email: result.fieldErrors.email?.join('. '),
-    //     username: result.fieldErrors.username?.join('. '),
-    //     password: result.fieldErrors.password?.join('. '),
-    //   })
-    //   return
-    // }
-
-    // if (result.error) {
-    //   setError(result.error)
-    //   return
-    // }
+    if (result.error) {
+      setError(result.error)
+      return
+    }
 
     setError('Failed to sign up. Please try again later.')
-    // console.error(result)
   })
 
   const [isDisabled, setIsDisabled] = useState(!form.getValues().terms)

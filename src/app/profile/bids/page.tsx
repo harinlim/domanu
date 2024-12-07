@@ -3,24 +3,20 @@
 import { AppShell, AppShellMain, Title, Grid } from '@mantine/core'
 import Header from '../../components/Header'
 import NavBar from '../../components/NavBar'
-import Card from '../../components/Card'
+import Card from '../../components/MarketplaceCard'
 
 export default function Bids() {
   let bid1 = Card({
     title: 'Ride Share Service',
     image: '/drive.jpg',
     description: 'Bid: $200 for 10 trips',
-    button: 'View',
-    redirect: '',
-    numCol: 3,
+    id: 1,
   })
   let bid2 = Card({
     title: 'Barber',
     image: '/barber.jpg',
     description: 'Bid: $400 for 10 haircuts',
-    button: 'View',
-    redirect: '',
-    numCol: 3,
+    id: 2,
   })
 
   return (

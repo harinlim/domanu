@@ -1,6 +1,4 @@
 from typing import Union
-
-import bcrypt
 from fastapi import APIRouter, Depends, HTTPException, FastAPI
 from app.api.models import User
 from app.db.supabase import create_supabase_client
