@@ -7,6 +7,8 @@ from backend.api.auth import user_id
 from backend.api.profiles import get_designer_value, get_marketplaces
 import uuid
 
+ 
+
 # Initialize supabase client
 supabase = create_supabase_client()
 
@@ -157,6 +159,7 @@ def delete_service(service_id: int):
         print("Error: ", e)
         return {"message": e}
 
+# Gets the marketplace services based on marketplace id
 @api.get("/marketplace/{marketplace_id}", tags=["services"])
 def get_marketplace_services(marketplace_id: int):
     try:
@@ -178,7 +181,7 @@ def get_marketplace_services(marketplace_id: int):
         print("Error: ", e)
         return {"status": "error", "message": str(e)}
 
-
+# Retrieves all services
 @api.get("/all-services", tags=["services"])
 def get_all_services():
     try:

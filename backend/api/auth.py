@@ -5,6 +5,7 @@ from backend.db.supabase import create_supabase_client
 import json
 import uuid
 
+
 # Initialize supabase client
 supabase = create_supabase_client()
 
@@ -52,6 +53,7 @@ def sign_in(user: User):
         print("Error: ", e)
         return {"message": "User could not be signed in"}
     
+# Gets user session data after log in
 @api.get("/session", tags=["auth"])
 def get_session():
     try:
@@ -75,7 +77,7 @@ def sign_out():
         print("Error: ", e)
         return {"message": "User could not be signed out"}
     
-
+# Retrieve logged in user data
 @api.get("/retrieve-user", tags=["auth"])
 def user_data():
     try:
@@ -89,6 +91,7 @@ def user_data():
         print("Error: ", e)
         return {"message": e}
     
+# Retrieve logged in user id
 @api.get("/retrieve-user-id", tags=["auth"])
 def user_id():
     try:
@@ -101,31 +104,3 @@ def user_id():
     except Exception as e:
         print("Error: ", e)
         return {"message": e}
-
-@api.put("/update-email", tags=["auth"])
-def update_email(email: str):
-    try:
-        response = supabase.auth.update_user({
-            "email": email.lower()})
-        
-        if response:
-            return {"message": f"Email updated"} 
-        else:
-            return {"message": "Could not update email"}
-    except Exception as e:
-        print("Error: ", e)
-        return {"message": e}
-
-@api.put("/update-password", tags=["auth"])
-def update_password(password: str):
-    try:
-        response = supabase.auth.update_user({"password": password})
-
-        if response:
-            return {"message": f"Password updated"} 
-        else:
-            return {"message": "Could not update password"}
-    except Exception as e:
-        print("Error: ", e)
-        return {"message": e}
-    

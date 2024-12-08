@@ -5,6 +5,7 @@ from backend.api.profiles import api as profiles_router
 from backend.api.marketplace import api as marketplace_router
 from backend.api.services import api as service_router
 
+
 app = FastAPI()
 
 app.add_middleware(

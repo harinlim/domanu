@@ -7,6 +7,8 @@ from backend.db.supabase import create_supabase_client
 from backend.api.auth import user_id
 import uuid
 
+ 
+
 # Initialize supabase client
 supabase = create_supabase_client()
 
@@ -42,7 +44,7 @@ def update_profile(profile: Profile):
         print("Error: ", e)
         return {"message": e}
     
-
+# Gives user designer permissions - will need to be an action only by admin later
 @api.post("/make-designer", tags=["profiles"])
 def make_designer():
     try:
@@ -66,7 +68,7 @@ def make_designer():
         print("Error: ", e)
         return {"message": e}
     
-
+# Retrieves users username
 @api.get("/get_first_name", tags=["profiles"])
 def get_username():
     try:
@@ -90,7 +92,7 @@ def get_username():
         print("Error: ", e)
         return {"message": e}
 
-
+# Retrieves users first name
 @api.get("/get_first_name", tags=["profiles"])
 def get_first_name():
     try:
@@ -114,7 +116,7 @@ def get_first_name():
         print("Error: ", e)
         return {"message": e}
     
-
+# Retrieves users last name
 @api.get("/get_last_name", tags=["profiles"])
 def get_last_name():
     try:
@@ -138,7 +140,7 @@ def get_last_name():
         print("Error: ", e)
         return {"message": e}
     
-
+# Retrieves designer value
 @api.get("/get_designer", tags=["profiles"])
 def get_designer_value():
     try:
@@ -162,7 +164,7 @@ def get_designer_value():
         print("Error: ", e)
         return {"message": e}
 
-
+# Gets full user profile
 @api.get("/get_user_profile", tags=["profiles"])
 def get_user_profile():
     try:
@@ -186,6 +188,7 @@ def get_user_profile():
         print("Error: ", e)
         return {"message": e}
     
+# Returns maketplaces user is a member of
 @api.get("/get_member_marketplaces", tags=["profiles"])
 def get_marketplaces():
     try:
@@ -210,6 +213,7 @@ def get_marketplaces():
         print("Error: ", e)
         return {"message": e}
 
+# Allows user to join new marketplaces
 @api.get("/join_marketplaces", tags=["profiles"])
 def join_marketplaces(marketplace_id: int):
     try:
