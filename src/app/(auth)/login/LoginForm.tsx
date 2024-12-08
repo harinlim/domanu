@@ -25,7 +25,7 @@ export function LoginForm() {
   const form = useForm({
     mode: 'uncontrolled',
     initialValues: {
-      identifier: '',
+      email: '',
       password: '',
       remember: false,
     },
@@ -38,13 +38,13 @@ export function LoginForm() {
 
   const router = useRouter()
 
-  const handleSubmit = form.onSubmit(async (values) => {
+  const handleSubmit = form.onSubmit(async values => {
     setIsSubmitting(true)
     const result = await login(values)
 
     if (result.success) {
       setError('')
-      router.push('/signup/success')
+      router.push('/')
       return
     }
 
@@ -97,7 +97,7 @@ export function LoginForm() {
     </Anchor> */}
       </Group>
       <Button type="submit" disabled={isSubmitting} className="mt-5 h-11 w-full bg-blue-600">
-        <Text className="text-sm font-medium">Sign up</Text>
+        <Text className="text-sm font-medium">Sign in</Text>
       </Button>
     </form>
   )

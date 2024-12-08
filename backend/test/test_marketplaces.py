@@ -1,10 +1,10 @@
 import pytest
 from fastapi.testclient import TestClient
-from app.db.supabase import create_supabase_client, Client
+from backend.db.supabase import create_supabase_client, Client
 from supabase import Client, create_client
-from app.config import url, secret_key
-from app.api.main import app  # Adjust import to your FastAPI entry point
-from app.api.auth import user_id
+from backend.config import url, secret_key
+from backend.api.main import app  # Adjust import to your FastAPI entry point
+from backend.api.auth import user_id
 import uuid
 
 from supabase.lib.client_options import ClientOptions

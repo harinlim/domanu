@@ -1,7 +1,7 @@
 from typing import Union
 from fastapi import APIRouter, Depends, HTTPException, FastAPI
-from app.api.models import User
-from app.db.supabase import create_supabase_client
+from backend.api.models import User
+from backend.db.supabase import create_supabase_client
 import json
 import uuid
 

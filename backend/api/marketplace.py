@@ -1,10 +1,10 @@
 from typing import Union
 
 from fastapi import APIRouter, Depends, HTTPException, FastAPI
-from app.api.models import User, Profile, Marketplace
-from app.db.supabase import create_supabase_client
-from app.api.auth import user_id
-from app.api.profiles import get_designer_value
+from backend.api.models import User, Profile, Marketplace
+from backend.db.supabase import create_supabase_client
+from backend.api.auth import user_id
+from backend.api.profiles import get_designer_value
 import uuid
 
 # Initialize supabase client

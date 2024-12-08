@@ -2,9 +2,9 @@ from typing import Union
 
 from fastapi import APIRouter, Depends, HTTPException, FastAPI
 from fastapi.encoders import jsonable_encoder
-from app.api.models import User, Profile
-from app.db.supabase import create_supabase_client
-from app.api.auth import user_id
+from backend.api.models import User, Profile
+from backend.db.supabase import create_supabase_client
+from backend.api.auth import user_id
 import uuid
 
 # Initialize supabase client

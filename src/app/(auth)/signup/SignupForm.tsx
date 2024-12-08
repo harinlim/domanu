@@ -45,7 +45,7 @@ export function SignupForm() {
 
     if (result.success) {
       setError('')
-      router.push('/signup/success')
+      router.push('/')
       return
     }
 

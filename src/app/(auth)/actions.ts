@@ -18,7 +18,7 @@ export async function login(values: LoginInput): Promise<AuthResponse> {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: values.identifier,
+        email: values.email,
         password: values.password,
       }),
       credentials: 'include',
@@ -62,7 +62,7 @@ export async function signup(values: SignupInput): Promise<AuthResponse> {
     if (data.message === 'User created successfully') {
       // After successful signup, automatically log the user in
       const loginResponse = await login({
-        identifier: values.email,
+        email: values.email,
         password: values.password,
       })
 
