@@ -7,8 +7,11 @@ from app.db.supabase import create_supabase_client
 import json
 import uuid
 
+authors = ["Chiara Sabato"]
+
 # Initialize supabase client
 supabase = create_supabase_client()
+
 
 api = APIRouter(prefix="/auth")
 

@@ -2,6 +2,7 @@ import uuid
 from pydantic import BaseModel
 from typing import Optional
 
+authors = ["Chiara Sabato"]
 
 class User(BaseModel):
     email: str

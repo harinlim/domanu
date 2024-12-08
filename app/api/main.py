@@ -4,6 +4,8 @@ from app.api.profiles import api as profiles_router
 from app.api.marketplace import api as marketplace_router
 from app.api.services import api as service_router
 
+authors = ["Chiara Sabato"]
+
 app = FastAPI()
 
 # Include routers

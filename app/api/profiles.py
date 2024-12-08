@@ -7,6 +7,8 @@ from app.db.supabase import create_supabase_client
 from app.api.auth import user_id
 import uuid
 
+authors = ["Chiara Sabato"]
+
 # Initialize supabase client
 supabase = create_supabase_client()
 

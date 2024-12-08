@@ -9,6 +9,8 @@ import uuid
 
 from supabase.lib.client_options import ClientOptions
 
+authors = ["Chiara Sabato"]
+
 supabase = create_supabase_client()
 
 client = TestClient(app)
