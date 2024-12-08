@@ -2,10 +2,29 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { AppShellHeader, Flex, Avatar, Title } from '@mantine/core'
+import { AppShellHeader, Flex, Avatar, Title, Button } from '@mantine/core'
 import '@mantine/core/styles.css'
+import { signOut } from '../(auth)/actions'
 
-export default function Header() {
+interface SessionUser {
+  id: string;
+  email?: string;
+  user_metadata?: {
+    avatar_url?: string;
+  };
+}
+
+interface SessionData {
+  user: SessionUser;
+  access_token: string;
+  refresh_token: string;
+}
+
+interface HeaderProps {
+  session: SessionData | null;
+}
+
+export default function Header({ session }: HeaderProps) {
   return (
     <AppShellHeader>
       <Flex
@@ -17,9 +36,28 @@ export default function Header() {
           <Link href="/">Domanu</Link>
         </Title>
 
-        <Link href="/profile">
-          <Avatar src="/profile-icon.svg" radius="xl" size="lg" />
-        </Link>
+        <div className="flex items-center gap-4">
+          { session ? (
+            <Button onClick={async () => { 
+              await signOut(); 
+              // Reset page to reload layout
+              window.location.reload() 
+            }}>
+              Sign out
+            </Button>
+          ) : (
+            <Button component={Link} href="/login">
+              Login
+            </Button>
+          )}
+            <Link href={session ? "/profile" : "/login"}>
+              <Avatar 
+              src={session?.user?.user_metadata?.avatar_url || "/profile-icon.svg"} 
+              radius="xl" 
+              size="lg" 
+            />
+          </Link>
+        </div>
       </Flex>
     </AppShellHeader>
   )

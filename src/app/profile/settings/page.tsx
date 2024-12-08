@@ -1,19 +1,12 @@
 'use client'
 
-import { AppShell, AppShellMain, Title, Container } from '@mantine/core'
-import Header from '../../components/Header'
-import NavBar from '../../components/NavBar'
+import ProfileLayout from "../ProfileLayout"
+import { Text } from "@mantine/core"
 
-export default function Profile() {
+export default function Settings() {
   return (
-    <AppShell header={{ height: 120 }} navbar={{ width: 200, breakpoint: 'sm' }} padding="md">
-      {Header()}
-      {NavBar('/profile/settings')}
-      <AppShellMain>
-        <Title order={1} style={{ color: '#699B60', paddingLeft: 20, paddingTop: 20 }}>
-          Settings
-        </Title>
-      </AppShellMain>
-    </AppShell>
+    <ProfileLayout title="Settings" currentPath="/profile/settings">
+      <Text>Settings</Text>
+    </ProfileLayout>
   )
 }
