@@ -16,7 +16,7 @@ export default function Page() {
           <Title order={1} className="py-5 text-center text-[#699B60]">
             Join Domanu today to start buying and selling services!
           </Title>
-          <Button component={Link} href="/login">
+          <Button component={Link} href="/signup">
             Join now!
           </Button>
         </div>
