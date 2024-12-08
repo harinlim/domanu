@@ -1,10 +1,11 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { Grid, Title, Text, Image } from '@mantine/core'
+import { Grid, Title, Text, Image, Button } from '@mantine/core'
 import type { Marketplace, MarketplaceResponse } from '@/types/marketplace'
 import type { Service, ServicesResponse } from '@/types/service'
 import ServiceCard from '../../components/ServiceCard'
+import Link from 'next/link'
 
 export default function MarketplacePage({ params }: { params: { marketplaceId: string } }) {
   const [marketplace, setMarketplace] = useState<Marketplace | null>(null)
@@ -84,9 +85,15 @@ export default function MarketplacePage({ params }: { params: { marketplaceId: s
         </Grid.Col>
 
         <Grid.Col span={2}>
-          <Text size="xl" className="text-[#699B60]">
-            Sell a Service
-          </Text>
+          <Link href={`/marketplace/${params.marketplaceId}/sell`}>
+            <Button
+              variant="filled"
+              radius="xl"
+              className="bg-[#699B60] transition-colors duration-200 hover:bg-[#588350]"
+            >
+              Sell a Service
+            </Button>
+          </Link>
         </Grid.Col>
       </Grid>
 
@@ -101,10 +108,10 @@ export default function MarketplacePage({ params }: { params: { marketplaceId: s
           <ServiceCard
             key={service.id}
             title={service.name}
-            image="/service-default.jpg" // You might want to add image field to services
+            image="/service-default.jpg"
             description={service.description}
             id={parseInt(service.id)}
-            marketId={parseInt(marketplace.id)}
+            marketId={parseInt(params.marketplaceId)}
           />
         ))}
       </div>

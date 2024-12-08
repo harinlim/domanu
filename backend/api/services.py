@@ -34,11 +34,9 @@ def create_service(service: Services):
             if response:
                 return {"message": f"{response}"} 
             else:
-                return {"message": "Marketplace could not be created"}
+                return {"message": "Service could not be created"}
         else:
-            return {"message": "User does not have designer permissions"}
-
-
+            return {"message": "Service could not be created"}
         
     except Exception as e:
         print("Error: ", e)
@@ -201,7 +199,8 @@ def get_all_services():
     except Exception as e:
         print("Error: ", e)
         return {"status": "error", "message": str(e)}
-    
+
+# Retrieves service from ID
 @api.get("/service/{service_id}", tags=["services"])
 def get_service_by_id(service_id: int):
     try:
