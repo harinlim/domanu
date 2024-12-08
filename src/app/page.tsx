@@ -16,7 +16,7 @@ export default function Home() {
   useEffect(() => {
     const fetchMarketplaces = async () => {
       try {
-        const response = await fetch('/api/marketplaces/get-marketplaces', {
+        const response = await fetch('/api/marketplaces/get-all-marketplaces', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

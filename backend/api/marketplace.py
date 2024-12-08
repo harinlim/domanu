@@ -80,6 +80,28 @@ def get_marketplaces():
             "data": []
         }
 
+# Retrieves all marketplaces on Domanu without needing to authenticate - for homescreen and joining new marketplaces
+@api.get("/get-all-marketplaces", tags=["marketplaces"])
+def get_all_marketplaces():
+    try:
+        response = (
+            supabase.table("marketplaces")
+            .select("*")
+            .execute()
+        )
+
+        if response:
+            return {
+                "status": "success",
+                "data": response.data,  # This is already a list of dictionaries
+                "count": len(response.data)
+            }
+        else:
+            return {"message": "Marketplace could not be found"}
+    except Exception as e:
+        print("Error: ", e)
+        return {"message": e}
+    
 # Returns marketplace from id
 @api.get("/{marketplace_id}", tags=["marketplaces"])
 def get_marketplace(marketplace_id: int):
