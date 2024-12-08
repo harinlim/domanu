@@ -16,8 +16,6 @@ import { IconAlertCircle } from '@tabler/icons-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-
-// import { signup } from '../actions'
 import { signupSchema } from '../schemas'
 import { signup } from '../actions'
 
