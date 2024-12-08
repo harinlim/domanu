@@ -15,7 +15,7 @@ interface CardProps {
 
 export default function ServiceCard({ title, image, description, id, marketId }: CardProps) {
   return (
-    <div className={`basis-[calc(${100 / 3}%-1rem)] max-w-[400px]`}>
+    <div className={`basis-[calc(${100 / 3}%-1rem)] max-w-[380px]`}>
       <Card
         shadow="sm"
         padding="lg"
