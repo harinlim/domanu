@@ -26,6 +26,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 # Detailed Documentation
 
-Details about the project's APIs can be found [here](app/README.md)
+Details about the project's APIs can be found [here](app/api/README.md)
 
 Details on how to run tests on the project's APIs can be found [here](app/test/README.md)

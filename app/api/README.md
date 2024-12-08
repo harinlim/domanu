@@ -24,10 +24,6 @@ The authentication API's are stored in auth.py and allow the application to comm
 
 `user_id` returns the id of the logged in user. This will be used throughout the application to retrieve data that is related to the user.
 
-`update_email` allows the user to change the email attached to their account.
-
-`update_password` gives the user the ability to change their account password.
-
 ## Profiles
 
 The `Profiles` database holds all the user's account information that does not pertain to login information. This includes the user's first name, last name, username, whether they are a designer or not, and the marketplaces the user is a member of. More details may need to be added as the application grows in complexity. For a basic implementation of a user profile, logging, in, and basic functionality of joining marketplaces and creating services, these are all that are needed.
