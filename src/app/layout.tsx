@@ -5,6 +5,7 @@ import { AppShell, AppShellMain, MantineProvider } from '@mantine/core'
 import { theme } from './theme'
 import '@mantine/core/styles.css'
 import Header from './components/Header'
+import LayoutShell from './LayoutShell'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -33,12 +34,9 @@ export default async function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <MantineProvider defaultColorScheme="light" theme={theme}>
           <main className="min-h-full">
-            <AppShell header={{ height: 120 }} padding="md">
-              <Header />
-              <AppShellMain>
-                {children}
-              </AppShellMain>
-            </AppShell>
+            <LayoutShell>
+              {children}
+            </LayoutShell>
           </main>
         </MantineProvider>
       </body>

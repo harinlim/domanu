@@ -1,27 +1,26 @@
 'use client'
 
-import { Title } from '@mantine/core'
-import Link from 'next/link'
+import { Button, Title } from '@mantine/core'
 import { useState } from 'react'
 
-export default function NavBarItem(text: string, link: string, page: string) {
-  const [activeLink, setActiveLink] = useState(page)
+type NavBarItemProps = {
+  text: string
+  onClick: (path: string) => void
+  currentTab: string
+  pageTab: string
+}
 
-  const handleLinkClick = (link: string) => {
-    setActiveLink(link)
-  }
-
+export default function NavBarItem({ text, onClick, currentTab, pageTab }: NavBarItemProps) {
   return (
     <div
       style={{
         width: '100%',
-        backgroundColor: activeLink === link ? '#e1f5e1' : 'transparent',
+        backgroundColor: pageTab === currentTab ? '#e1f5e1' : 'transparent',
         borderRadius: 4,
         marginBottom: '10px',
       }}
-      onClick={() => handleLinkClick(link)}
+      onClick={() => onClick(pageTab)}
     >
-      <Link href={link}>
         <Title
           order={3}
           style={{
@@ -37,7 +36,6 @@ export default function NavBarItem(text: string, link: string, page: string) {
         >
           {text}
         </Title>
-      </Link>
     </div>
   )
 }

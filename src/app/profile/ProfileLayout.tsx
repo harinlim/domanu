@@ -1,16 +1,32 @@
-import { AppShell, AppShellMain } from '@mantine/core'
+'use client'
+
+import { AppShell, AppShellMain, AppShellNavbar } from '@mantine/core'
 import NavBar from '@/app/components/NavBar'
+import { useSession } from '@/hooks/useSession'
+import { useRouter } from 'next/navigation'
 
 interface ProfileLayoutProps {
   children: React.ReactNode
   title: string
-  currentPath: string
+  currentTab: string
+  onClick: (tab: string) => void
 }
 
-export default function ProfileLayout({ children, title, currentPath }: ProfileLayoutProps) {
+export default function ProfileLayout({ children, title, currentTab, onClick }: ProfileLayoutProps) {
+  const { session, loading, error } = useSession();
+  const router = useRouter();
+  
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error: {error}</div>
+  if (!session) {
+    router.push('/login')
+  }
+
   return (
-    <AppShell header={{ height: 120 }} navbar={{ width: 200,  breakpoint: 'sm' }}>
-      {NavBar(currentPath)}
+    <>
+      <AppShellNavbar>
+        <NavBar currentTab={currentTab} onClick={onClick} />
+      </AppShellNavbar>
       <AppShellMain>
         {title && (
           <h1 className="px-5 pt-5 text-2xl font-bold text-[#699B60]">
@@ -21,6 +37,6 @@ export default function ProfileLayout({ children, title, currentPath }: ProfileL
           {children}
         </div>
       </AppShellMain>
-    </AppShell>
+    </>
   )
 }

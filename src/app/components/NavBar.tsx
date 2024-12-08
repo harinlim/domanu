@@ -1,18 +1,21 @@
 'use client'
 
-import { AppShell, Container } from '@mantine/core'
+import { Container } from '@mantine/core'
 import NavBarItem from '../components/NavBarItem'
 
-export default function NavBar(page: string) {
+type NavBarProps = {
+  currentTab: string
+  onClick: (path: string) => void
+}
+
+export default function NavBar({ currentTab, onClick }: NavBarProps) {
   return (
-    <AppShell.Navbar p="md">
-      <Container>
-        {NavBarItem('Profile', '/profile', page)}
-        {NavBarItem('Contracts', '/profile/contracts', page)}
-        {NavBarItem('Bids', '/profile/bids', page)}
-        {NavBarItem('Listings', '/profile/listings', page)}
-        {NavBarItem('Settings', '/profile/settings', page)}
-      </Container>
-    </AppShell.Navbar>
+    <Container p="md">
+      <NavBarItem text="Profile" onClick={onClick} currentTab={currentTab} pageTab="profile" />
+      <NavBarItem text="Contracts" onClick={onClick} currentTab={currentTab} pageTab="contracts" />
+      <NavBarItem text="Bids" onClick={onClick} currentTab={currentTab} pageTab="bids" />
+      <NavBarItem text="Listings" onClick={onClick} currentTab={currentTab} pageTab="listings" />
+      <NavBarItem text="Settings" onClick={onClick} currentTab={currentTab} pageTab="settings" />
+    </Container>
   )
 }
