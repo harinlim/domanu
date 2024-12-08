@@ -104,31 +104,16 @@ def user_id():
     except Exception as e:
         print("Error: ", e)
         return {"message": e}
-
-@api.put("/update-email", tags=["auth"])
-def update_email(email: str):
-    try:
-        response = supabase.auth.update_user({
-            "email": email.lower()})
-        
-        if response:
-            return {"message": f"Email updated"} 
-        else:
-            return {"message": "Could not update email"}
-    except Exception as e:
-        print("Error: ", e)
-        return {"message": e}
-
-@api.put("/update-password", tags=["auth"])
-def update_password(password: str):
-    try:
-        response = supabase.auth.update_user({"password": password})
-
-        if response:
-            return {"message": f"Password updated"} 
-        else:
-            return {"message": "Could not update password"}
-    except Exception as e:
-        print("Error: ", e)
-        return {"message": e}
     
+@api.get("/retrieve-user-email", tags=["auth"])
+def user_id():
+    try:
+        response = supabase.auth.get_user() # need to convert output to JSON for access to email
+
+        if response:
+            return {"message": f"{response.user.email}"} 
+        else:
+            return {"message": "User could not be found"}
+    except Exception as e:
+        print("Error: ", e)
+        return {"message": e}

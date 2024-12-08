@@ -9,3 +9,5 @@ Run this command `export PYTHONPATH="{path}/domanu:$PYTHONPATH"` where path is t
 Then run `pytest app/test/test_auth.py`
 
 The testing of the authentication APIs will create a new user, attempt to log them into the database, retrieve all of their data, and then specifically retrieve their user id. At the start of the testing, if the test user already exists the account will be deleted and then tests will be run. This user will remain in the database when testing concludes and the process will restart when testing occurs again. 
+
+There is also testing for trying to log in a user that does not exist and trying to create a new user that already exists.
