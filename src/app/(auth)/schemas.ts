@@ -14,6 +14,9 @@ export const signupSchema = z.object({
     .string()
     .min(6, 'Password must be at least 6 characters')
     .min(1, 'Please enter a password'),
+  first_name: z.string().min(1, 'Please enter a first name'),
+  last_name: z.string().min(1, 'Please enter a last name'),
+  username: z.string().min(1, 'Please enter a username'),
 })
 
 export type SignupSchema = z.infer<typeof signupSchema>
