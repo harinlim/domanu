@@ -35,3 +35,40 @@
     opacity: 1;
   }
 }
+
+
+.faq-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 10px;
+}
+.faq-item {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.faq-question h3 {
+  margin: 0;
+}
+
+.faq-question button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+.faq-answer {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+.faq-header{
+  margin-left: 40%;
+  margin-right: 30%;
+  padding: auto;
+}

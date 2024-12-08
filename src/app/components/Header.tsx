@@ -40,6 +40,9 @@ export default function Header() {
         </Title>
 
         <div className="flex items-center gap-4">
+        <Button component={Link} href="/help" variant="outline" color="green">
+            FAQs
+          </Button>
           { session ? (
             <Button onClick={async () => { 
               await signOut(); 
