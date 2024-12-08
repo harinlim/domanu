@@ -1,7 +1,6 @@
 import { z } from 'zod'
 import { loginSchema, signupSchema } from './schemas'
-import { revalidatePath, revalidateTag } from 'next/cache'
-import { redirect } from 'next/navigation'
+
 type LoginInput = z.infer<typeof loginSchema>
 type SignupInput = z.infer<typeof signupSchema>
 

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { AppShellHeader, Flex, Avatar, Title, Button } from '@mantine/core'
 import '@mantine/core/styles.css'
 import { signOut } from '../(auth)/actions'
+import { useSession } from '@/hooks/useSession'
 
 interface SessionUser {
   id: string;
@@ -24,7 +25,9 @@ interface HeaderProps {
   session: SessionData | null;
 }
 
-export default function Header({ session }: HeaderProps) {
+export default function Header() {
+  const { session, loading, error } = useSession();
+  console.log("session", session)
   return (
     <AppShellHeader>
       <Flex
@@ -52,7 +55,7 @@ export default function Header({ session }: HeaderProps) {
           )}
             <Link href={session ? "/profile" : "/login"}>
               <Avatar 
-              src={session?.user?.user_metadata?.avatar_url || "/profile-icon.svg"} 
+              src={"/profile-icon.svg"} 
               radius="xl" 
               size="lg" 
             />

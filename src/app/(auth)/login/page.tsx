@@ -2,10 +2,7 @@ import { Anchor, Paper, Title, Text, Container, Box, Stack } from '@mantine/core
 import Link from 'next/link'
 
 import { LoginForm } from './LoginForm'
-import { UrlObject } from 'url'
-
 export default function Login() {
-  // const href: UrlObject = new URL("/")
   return (
     <Stack className="min-h-[calc(100dvh-200px)] justify-center">
       <Box>
