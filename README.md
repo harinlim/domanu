@@ -14,6 +14,9 @@ Install packages:
 ```bash
 pnpm i
 ```
+```bash
+pip install -r requirements.txt
+```
 
 Run the development server:
 
