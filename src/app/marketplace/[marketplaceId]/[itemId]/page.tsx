@@ -33,32 +33,36 @@ function Item1({ params }: { params: { itemId: string; marketplaceId: string } }
     }
 
     fetchService()
+  }, [params.itemId])
 
-    const fetchSeller = async () => {
-      try {
-        const response = await fetch(`/api/profiles/username/${service?.seller}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-        })
+  useEffect(() => {
+    if (service?.seller) {
+      const fetchSeller = async () => {
+        try {
+          const response = await fetch(`/api/profiles/username/${service.seller}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+          })
 
-        const data = await response.json()
-        if (data.data && data.data.length > 0) {
-          setSeller(data.data[0].username)
-        } else {
-          setSeller('')
+          const data = await response.json()
+          if (data.data && data.data.length > 0) {
+            setSeller(data.data[0].username)
+          } else {
+            setSeller('')
+          }
+        } catch (err) {
+          setError(err instanceof Error ? err.message : 'Failed to fetch seller')
+        } finally {
+          setLoading(false)
         }
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch seller')
-      } finally {
-        setLoading(false)
       }
-    }
 
-    fetchSeller()
-  }, [params.itemId, service?.seller])
+      fetchSeller()
+    }
+  }, [service?.seller])
 
   if (loading) {
     return <div>Loading...</div>
