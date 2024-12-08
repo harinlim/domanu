@@ -21,6 +21,11 @@ Run the development server:
 pnpm dev
 ```
 
+Start the Supabase server:
+```bash
+uvicorn backend.api.main:app --reload
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 # Detailed Documentation
