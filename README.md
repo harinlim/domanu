@@ -5,7 +5,7 @@ This website is designed to increase connectivity in consumerism and give users 
 
 This app is built with a React frontend and Python backend that integrates with Supabase to handle storage and authentication.
 
-## Contributing
+## Running the App
 
 First, make sure you have node v22.9 and pnpm 8.15.8 installed. 
 
@@ -23,7 +23,7 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Detailed Documentation
+# Detailed Documentation
 
 Details about the project's backend structure can be found [here](backend/README.md)
 
