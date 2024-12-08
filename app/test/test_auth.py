@@ -30,6 +30,17 @@ fake_user = {
     "password": "fakePassword"
 }
 
+invalid_user = {
+    "email": "dummy.email@domanu.com",
+    "password": "12345"
+}
+
+empty_user = {
+    "email": "",
+    "password": ""
+}
+
+# Autorun to delete test user
 @pytest.fixture(scope="module", autouse=True)
 def cleanup_user():
     print("Running setup: attempting to delete user before tests.")
@@ -39,7 +50,7 @@ def cleanup_user():
     except Exception as e:
         print(f"Error during initial cleanup: {e}")
 
-
+# Deletes test user so tests can be rerun with same data - user exists as a test user in the database until a new 
 def delete_new_user():
     try:
         supabase = create_client(
@@ -94,19 +105,30 @@ def test_user_id():
     assert "d85a9bde-c6e8-4fbb-8717-9a7e166916bd" in response.json()['message']
     assert isinstance(response.json()["message"], str)
     
-
-# Test retrieving the user ID
+# Test signing out logged in user
 def test_sign_out():
     response = client.get("/auth/auth/sign-out")
     assert response.status_code == 200 # no message body
+
+## Edge Case Tests
+
+# Test invalid password with length < 6
+def test_sign_up_invalid_users():
+    response = client.post("/auth/auth/create-user", json=invalid_user)
+    assert "Password should be at least 6 characters." in response.json()['message']['message']
+
+# Test user with no data
+def test_sign_up_empty_user():
+    response = client.post("/auth/auth/create-user", json=empty_user)
+    assert "You must provide either an email or phone number and a password" in response.json()['message']['message']
+
+# Test create user that already exists
+def test_existing_user_creation():
+    response = client.post("/auth/auth/create-user", json=test_user) # user was created at the start of the tests - should not create again
+    assert "User already registered" in response.json()['message']['message']
 
 # Test fake user
 def test_signin_fake_user():
     response = client.post("/auth/auth/sign-in", json=fake_user)
     assert response.status_code == 200
     assert "User could not be signed" in response.json()["message"]
-
-# Test create user that already exists
-def test_existing_user_creation():
-    response = client.post("/auth/auth/create-user", json=test_user)
-    assert "User already registered" in response.json()['message']['message']

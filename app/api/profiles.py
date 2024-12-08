@@ -44,7 +44,7 @@ def update_profile(profile: Profile):
         print("Error: ", e)
         return {"message": e}
     
-
+# Make an existing user a designer - currently a permission of the user but would ideally be limited to admins to do this
 @api.post("/make-designer", tags=["profiles"])
 def make_designer():
     try:
@@ -68,7 +68,7 @@ def make_designer():
         print("Error: ", e)
         return {"message": e}
     
-
+# Retrieves user's username
 @api.get("/get_first_name", tags=["profiles"])
 def get_username():
     try:
@@ -92,7 +92,7 @@ def get_username():
         print("Error: ", e)
         return {"message": e}
 
-
+# Retrieves user's first name
 @api.get("/get_first_name", tags=["profiles"])
 def get_first_name():
     try:
@@ -116,7 +116,7 @@ def get_first_name():
         print("Error: ", e)
         return {"message": e}
     
-
+# Retrieves user's last name
 @api.get("/get_last_name", tags=["profiles"])
 def get_last_name():
     try:
@@ -140,7 +140,7 @@ def get_last_name():
         print("Error: ", e)
         return {"message": e}
     
-
+# Returns whether a user is a designer or not
 @api.get("/get_designer", tags=["profiles"])
 def get_designer_value():
     try:
@@ -164,7 +164,7 @@ def get_designer_value():
         print("Error: ", e)
         return {"message": e}
 
-
+# Retrieves user's full profile
 @api.get("/get_user_profile", tags=["profiles"])
 def get_user_profile():
     try:
@@ -187,7 +187,8 @@ def get_user_profile():
     except Exception as e:
         print("Error: ", e)
         return {"message": e}
-    
+
+# Retrieves marketplaces user is a member of so they can sell and buy on these marketplaces
 @api.get("/get_member_marketplaces", tags=["profiles"])
 def get_marketplaces():
     try:
@@ -212,6 +213,7 @@ def get_marketplaces():
         print("Error: ", e)
         return {"message": e}
 
+# Allows a user to join a marketplace
 @api.get("/join_marketplaces", tags=["profiles"])
 def join_marketplaces(marketplace_id: int):
     try:

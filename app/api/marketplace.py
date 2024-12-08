@@ -19,12 +19,12 @@ openapi_tags = {
     "description": "Modify and create marketplaces",
 }
 
-# Create a new user
+# Create a new marketplace
 @api.post("/create-marketplace", tags=["marketplaces"])
 def create_marketplace(marketplace: Marketplace):
     try:
 
-        if get_designer_value()["message"] == "True":
+        if get_designer_value()["message"] == "True": # must be a designer to be able to create a marketplace
             marketplace_struct = {"name": marketplace.name, "description": marketplace.description, "designer": user_id()['message'], "bidding": marketplace.bidding, "bargaining":marketplace.bargaining, "private": marketplace.private}
             response = (
             supabase.table("marketplaces")
@@ -46,6 +46,7 @@ def create_marketplace(marketplace: Marketplace):
         return {"message": e}
     
 
+# Retrieves marketplaces user is an owner of
 @api.get("/get-marketplaces", tags=["marketplaces"])
 def get_marketplaces():
     try:
@@ -69,7 +70,7 @@ def get_marketplaces():
         print("Error: ", e)
         return {"message": e}
     
-
+# Retrieves all marketplaces on Domanu without needing to authenticate - for homescreen and joining new marketplaces
 @api.get("/get-all-marketplaces", tags=["marketplaces"])
 def get_marketplaces():
     try:
