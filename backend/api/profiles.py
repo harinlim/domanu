@@ -2,7 +2,7 @@ from typing import Union
 
 from fastapi import APIRouter, Depends, HTTPException, FastAPI
 from fastapi.encoders import jsonable_encoder
-from backend.api.models import User, Profile
+from backend.api.models import User, Profile, ProfileUpdate
 from backend.db.supabase import create_supabase_client
 from backend.api.auth import user_id
 import uuid
@@ -22,10 +22,12 @@ openapi_tags = {
 
 # Update a new profile connected to user
 @api.post("/update-user", tags=["profiles"])
-def update_profile(profile: Profile):
+def update_profile(profile: ProfileUpdate):
+    print("hi", profile)
     try:
         try:
-            id = uuid.UUID(user_id()['message'])  # Convert to UUID
+            # id = uuid.UUID(user_id()['message'])  # Convert to UUID
+            id = uuid.UUID(profile.uuid)
         except ValueError:
             raise ValueError("Invalid UUID format for user ID")
 
@@ -38,6 +40,7 @@ def update_profile(profile: Profile):
         )
 
         if response:
+            print(response)
             return {"message": f"{response}"} 
         else:
             return {"message": "User could not be found"}

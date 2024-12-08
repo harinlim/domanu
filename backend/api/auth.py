@@ -30,7 +30,7 @@ def create_user(user: User):
 
         # Check if user was added
         if response:
-            return {"message": "User created successfully"}
+            return {"message": response}
         else:
             return {"message": "User creation failed"}
     except Exception as e:

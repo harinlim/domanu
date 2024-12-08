@@ -14,6 +14,12 @@ class Profile(BaseModel):
     last: str
     username: str
 
+class ProfileUpdate(BaseModel):
+    uuid: str
+    first: str
+    last: str
+    username: str
+
 
 class Marketplace(BaseModel):
     name: str

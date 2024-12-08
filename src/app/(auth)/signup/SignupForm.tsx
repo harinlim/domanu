@@ -25,6 +25,8 @@ export function SignupForm() {
     initialValues: {
       email: '',
       username: '',
+      first_name: '',
+      last_name: '',
       password: '',
       terms: false,
     },
@@ -50,7 +52,10 @@ export function SignupForm() {
     setIsSubmitting(false)
 
     if (result.error) {
-      setError(result.error)
+      const errorMessage = typeof result.error === 'object' 
+        ? result.error?.message || 'An unexpected error occurred'
+        : result.error
+      setError(errorMessage)
       return
     }
 
@@ -88,6 +93,22 @@ export function SignupForm() {
         mt="md"
         key={form.key('username')}
         {...form.getInputProps('username')}
+      />
+      <TextInput
+        label="First Name"
+        withAsterisk
+        placeholder="First Name"
+        mt="md"
+        key={form.key('first_name')}
+        {...form.getInputProps('first_name')}
+      />    
+      <TextInput
+        label="Last Name"
+        withAsterisk
+        placeholder="Last Name"
+        mt="md"
+        key={form.key('last_name')}
+        {...form.getInputProps('last_name')}
       />
       <PasswordInput
         label="Password"
