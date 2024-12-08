@@ -18,6 +18,11 @@ test_user = {
     "password": "TestPassword"
 }
 
+fake_user = {
+    "email": "dummy.email@domanu.com",
+    "password": "fakePassword"
+}
+
 @pytest.fixture(scope="module", autouse=True)
 def cleanup_user():
     print("Running setup: attempting to delete user before tests.")
@@ -41,15 +46,14 @@ def delete_test_user():
         admin_auth_client = supabase.auth.admin
 
         response = supabase.auth.admin.list_users()
-        # Extract users list (ensure response format handling)
-        # Find the user ID by matching email
+
         id_uuid = None
         for user in response:
             if user and user.user_metadata["email"] == test_user["email"]:
                 id_uuid = uuid.UUID(user.id)
-                break  # Exit loop once found
+                break  
 
-        # Step 2: Delete the user if found
+        # Delete the user if found
         if id_uuid is not None:
             try:
                 delete_response = supabase.auth.admin.delete_user(id_uuid)
@@ -82,4 +86,12 @@ def test_user_id():
     response = client.get("/auth/auth/retrieve-user-id")
     assert response.status_code == 200
     assert "message" in response.json()
-    assert isinstance(response.json()["message"], str)  # User ID should be a string
+    assert isinstance(response.json()["message"], str)  
+
+# Test fake user
+def test_signin_fake_user():
+    response = client.post("/auth/auth/sign-in", json=fake_user)
+    assert response.status_code == 200
+    assert "User could not be signed" in response.json()["message"]
+
+# Test create
