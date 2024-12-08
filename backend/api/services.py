@@ -65,7 +65,7 @@ def get_services():
     except Exception as e:
         print("Error: ", e)
         return {"message": e}
-    
+
 # Edit name of a services that the logged-in user owns
 @api.put("/update-service-name", tags=["services"])
 def update_service_name(new_name: str):
@@ -164,6 +164,27 @@ def get_marketplace_services(marketplace_id: int):
             supabase.table("services")
             .select("*")
             .eq("marketplace", marketplace_id)
+            .eq("active", True)
+            .execute()
+        )
+        
+        if response.data:
+            return {
+                "status": "success",
+                "data": response.data
+            }
+        return {"status": "success", "data": []}
+    except Exception as e:
+        print("Error: ", e)
+        return {"status": "error", "message": str(e)}
+
+
+@api.get("/all-services", tags=["services"])
+def get_all_services():
+    try:
+        response = (
+            supabase.table("services")
+            .select("*")
             .eq("active", True)
             .execute()
         )
