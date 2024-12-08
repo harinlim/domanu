@@ -66,3 +66,21 @@ def get_marketplaces():
     except Exception as e:
         print("Error: ", e)
         return {"message": e}
+    
+
+@api.get("/get-all-marketplaces", tags=["marketplaces"])
+def get_marketplaces():
+    try:
+        response = (
+            supabase.table("marketplaces")
+            .select("*")
+            .execute()
+        )
+
+        if response:
+            return {"message": f"{response}"} 
+        else:
+            return {"message": "Marketplace could not be found"}
+    except Exception as e:
+        print("Error: ", e)
+        return {"message": e}
