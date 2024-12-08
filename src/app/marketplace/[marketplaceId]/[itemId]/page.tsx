@@ -1,47 +1,85 @@
 'use client'
 
 import React from 'react'
+import { useEffect, useState } from 'react'
 import { AppShell, AppShellMain, Grid, Title, Space, Image, Text } from '@mantine/core'
 import '@mantine/core/styles.css'
+import { Service } from '@/types/service'
 
-function Item1() {
+function Item1({ params }: { params: { itemId: string; marketplaceId: string } }) {
+  const [service, setService] = useState<Service>()
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string>('')
+
+  useEffect(() => {
+    const fetchService = async () => {
+      try {
+        const response = await fetch(`/api/services/service/${params.itemId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        })
+
+        const data = await response.json()
+        setService(data.data)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch service')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchService()
+  }, [params.itemId])
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>
+  }
+
+  if (!service) {
+    return <div>No service available</div>
+  }
+
   return (
     <>
-        <Grid style={{ paddingLeft: 72, paddingTop: 20, paddingRight: 72 }}>
-          <Grid.Col span={1}>
-            <Image
-              radius="md"
-              src={'/drive.jpg'}
-              w="100%"
-              style={{
-                aspectRatio: '1/1',
-                objectFit: 'cover',
-              }}
-            />
-          </Grid.Col>
-          <Grid.Col span={3}>
-            <Title order={1} style={{ color: '#699B60' }}>
-              Ride Share Service
-            </Title>
-            <Space h="sm" />
-            <Text fw={700}>Open to bids</Text>
-            <Space h="sm" />
-            <Text>
-              Rides over time to get to any location within 10 miles of Chapel Hill. Car can seat
-              1-4 passengers excluding driver.
-            </Text>
-            <Space h="sm" />
-            <Text>Seller: driver123</Text>
-          </Grid.Col>
-        </Grid>
-        <Space h="lg" />
-        <Text size="xl" style={{ color: '#699B60', paddingLeft: 60 }}>
-          Make a Bid
-        </Text>
-        <Space h="lg" />
-        <Title order={1} style={{ color: '#699B60', paddingLeft: 60 }}>
-          Current Bids
-        </Title>
+      <Grid style={{ paddingLeft: 72, paddingTop: 20, paddingRight: 72 }}>
+        <Grid.Col span={1}>
+          <Image
+            radius="md"
+            src={'/service-default.jpg'}
+            w="100%"
+            style={{
+              aspectRatio: '1/1',
+              objectFit: 'cover',
+            }}
+          />
+        </Grid.Col>
+        <Grid.Col span={3}>
+          <Title order={1} style={{ color: '#699B60' }}>
+            {service.name}
+          </Title>
+          <Space h="sm" />
+          <Text fw={700}>Open to bids</Text>
+          <Space h="sm" />
+          <Text>{service.description}</Text>
+          <Space h="sm" />
+          <Text>Seller: driver123</Text>
+        </Grid.Col>
+      </Grid>
+      <Space h="lg" />
+      <Text size="xl" style={{ color: '#699B60', paddingLeft: 60 }}>
+        Make a Bid
+      </Text>
+      <Space h="lg" />
+      <Title order={1} style={{ color: '#699B60', paddingLeft: 60 }}>
+        Current Bids
+      </Title>
     </>
   )
 }

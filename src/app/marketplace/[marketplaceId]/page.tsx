@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react'
 import { Grid, Title, Text, Image } from '@mantine/core'
-import ItemCard from '../../components/ServiceCard'
 import type { Marketplace, MarketplaceResponse } from '@/types/marketplace'
 import type { Service, ServicesResponse } from '@/types/service'
 import ServiceCard from '../../components/ServiceCard'
@@ -63,7 +62,7 @@ export default function MarketplacePage({ params }: { params: { marketplaceId: s
               />
             </Grid.Col>
             <Grid.Col span={8}>
-              <Title order={1} className="text-[#699B60] mb-4">
+              <Title order={1} className="mb-4 text-[#699B60]">
                 {marketplace.name}
               </Title>
               <Text size="lg" className="leading-relaxed">
@@ -74,7 +73,9 @@ export default function MarketplacePage({ params }: { params: { marketplaceId: s
         </Grid.Col>
 
         <Grid.Col span={3} offset={1}>
-          <Text fw={700} className="mb-4">In this Marketplace</Text>
+          <Text fw={700} className="mb-4">
+            In this Marketplace
+          </Text>
           <div className="space-y-2">
             <Text>Bidding Enabled: {marketplace.bidding ? 'Yes' : 'No'}</Text>
             <Text>Bargaining Enabled: {marketplace.bargaining ? 'Yes' : 'No'}</Text>
@@ -89,20 +90,21 @@ export default function MarketplacePage({ params }: { params: { marketplaceId: s
         </Grid.Col>
       </Grid>
 
-      <div className="text-center mb-8">
+      <div className="mb-8 text-center">
         <Title order={1} className="text-[#699B60]">
           Available Services
         </Title>
       </div>
 
       <div className="flex flex-wrap gap-6 px-16">
-        {services.map((service) => (
+        {services.map(service => (
           <ServiceCard
             key={service.id}
             title={service.name}
             image="/service-default.jpg" // You might want to add image field to services
             description={service.description}
             id={parseInt(service.id)}
+            marketId={parseInt(marketplace.id)}
           />
         ))}
       </div>

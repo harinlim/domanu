@@ -198,3 +198,23 @@ def get_all_services():
     except Exception as e:
         print("Error: ", e)
         return {"status": "error", "message": str(e)}
+    
+@api.get("/service/{service_id}", tags=["services"])
+def get_service_by_id(service_id: int):
+    try:
+        response = (
+            supabase.table("services")
+            .select("*")
+            .eq("id", service_id)
+            .execute()
+        )
+
+        if response.data:
+            return {
+                "status": "success",
+                "data": response.data[0]
+            }
+        return {"status": "success", "data": None}
+    except Exception as e:
+        print("Error: ", e)
+        return {"status": "error", "message": str(e)}

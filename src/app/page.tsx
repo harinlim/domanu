@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react'
 import { Title } from '@mantine/core'
 import MarketplaceCard from './components/MarketplaceCard'
 import ServiceCard from './components/ServiceCard'
-import { MOCK_SERVICES } from './mocks/mock-data'
 import { Marketplace } from '@/types/marketplace'
+import { Service } from '@/types/service'
 
 export default function Home() {
   const [marketplaces, setMarketplaces] = useState<Marketplace[]>([])
+  const [services, setServices] = useState<Service[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string>('')
 
@@ -32,7 +33,27 @@ export default function Home() {
       }
     }
 
+    const fetchServices = async () => {
+      try {
+        const response = await fetch('/api/services/all-services', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        })
+
+        const data = await response.json()
+        setServices(data.data)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch services')
+      } finally {
+        setLoading(false)
+      }
+    }
+
     fetchMarketplaces()
+    fetchServices()
   }, [])
 
   if (loading) {
@@ -70,13 +91,14 @@ export default function Home() {
       </div>
 
       <div className="flex flex-wrap gap-4 px-12 py-5">
-        {MOCK_SERVICES.map(service => (
+        {services.map(service => (
           <div key={service.id}>
             <ServiceCard
               title={service.name}
-              image="unc.jpg"
+              image="service-default.jpg"
               description={service.description}
               id={parseInt(service.id)}
+              marketId={parseInt(service.marketplace)}
             />
           </div>
         ))}
