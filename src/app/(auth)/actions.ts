@@ -11,6 +11,7 @@ interface AuthResponse {
 }
 
 export async function login(values: LoginInput): Promise<AuthResponse> {
+  console.log("login", values)
   try {
     const response = await fetch('/api/auth/sign-in', {
       method: 'POST',

@@ -13,7 +13,7 @@ import { useForm, zodResolver } from '@mantine/form'
 import { IconAlertCircle } from '@tabler/icons-react'
 import { useState } from 'react'
 
-import { signupSchema } from '../schemas'
+import { loginSchema } from '../schemas'
 import { login } from '../actions'
 
 export function LoginForm() {
@@ -24,7 +24,7 @@ export function LoginForm() {
       password: '',
       remember: false,
     },
-    validate: zodResolver(signupSchema),
+    validate: zodResolver(loginSchema),
     clearInputErrorOnChange: true,
   })
 
@@ -32,6 +32,7 @@ export function LoginForm() {
   const [error, setError] = useState('')
 
   const handleSubmit = form.onSubmit(async values => {
+    console.log("values", values)
     setIsSubmitting(true)
     const result = await login(values)
 
