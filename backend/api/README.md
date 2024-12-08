@@ -1,6 +1,6 @@
 # Database Integration Documentation
 
-To test the API routes manually run this command in the terminal: `uvicorn app.api.main:app --reload`
+To test the API routes manually run this command in the terminal: `uvicorn backend.api.main:app --reload`
 
 Then open this address in the browser: `http://127.0.0.1:8000/docs`
 
