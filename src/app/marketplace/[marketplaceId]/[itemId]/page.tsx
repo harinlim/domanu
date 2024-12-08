@@ -8,6 +8,7 @@ import { Service } from '@/types/service'
 
 function Item1({ params }: { params: { itemId: string; marketplaceId: string } }) {
   const [service, setService] = useState<Service>()
+  const [seller, setSeller] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string>('')
 
@@ -32,7 +33,32 @@ function Item1({ params }: { params: { itemId: string; marketplaceId: string } }
     }
 
     fetchService()
-  }, [params.itemId])
+
+    const fetchSeller = async () => {
+      try {
+        const response = await fetch(`/api/profiles/username/${service?.seller}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        })
+
+        const data = await response.json()
+        if (data.data && data.data.length > 0) {
+          setSeller(data.data[0].username)
+        } else {
+          setSeller('')
+        }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch seller')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchSeller()
+  }, [params.itemId, service?.seller])
 
   if (loading) {
     return <div>Loading...</div>
@@ -69,7 +95,7 @@ function Item1({ params }: { params: { itemId: string; marketplaceId: string } }
           <Space h="sm" />
           <Text>{service.description}</Text>
           <Space h="sm" />
-          <Text>Seller: driver123</Text>
+          <Text>Seller: {seller}</Text>
         </Grid.Col>
       </Grid>
       <Space h="lg" />

@@ -6,6 +6,7 @@ from backend.api.models import User, Profile
 from backend.db.supabase import create_supabase_client
 from backend.api.auth import user_id
 import uuid
+from uuid import UUID
 
  
 
@@ -247,3 +248,24 @@ def join_marketplaces(marketplace_id: int):
     except Exception as e:
         print("Error: ", e)
         return {"message": e}
+    
+# Retrieves username from UUID
+@api.get("/username/{user_id}", tags=["profiles"])
+def get_username_by_id(user_id: UUID):
+    try:
+        response = (
+            supabase.table("profiles")
+            .select("username")
+            .eq("id", user_id)
+            .execute()
+        )
+
+        if response.data:
+            return {
+                "status": "success",
+                "data": response.data
+            }
+        return {"status": "success", "data": None}
+    except Exception as e:
+        print("Error: ", e)
+        return {"status": "error", "message": str(e)}
