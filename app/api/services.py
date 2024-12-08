@@ -7,6 +7,8 @@ from app.api.auth import user_id
 from app.api.profiles import get_designer_value, get_marketplaces
 import uuid
 
+authors = ["Chiara Sabato"]
+
 # Initialize supabase client
 supabase = create_supabase_client()
 

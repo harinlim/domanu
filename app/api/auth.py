@@ -7,8 +7,11 @@ from app.db.supabase import create_supabase_client
 import json
 import uuid
 
+authors = ["Chiara Sabato"]
+
 # Initialize supabase client
 supabase = create_supabase_client()
+
 
 api = APIRouter(prefix="/auth")
 
@@ -54,7 +57,7 @@ def sign_in(user: User):
         print("Error: ", e)
         return {"message": "User could not be signed in"}
 
-    
+# Get users session data
 @api.get("/session", tags=["auth"])
 def get_session():
     try:
@@ -68,8 +71,7 @@ def get_session():
         print("Error:", e)
         return {"message": "Session data cannot be retrieved"}
 
-    
-# Sign out existing user
+# Sign out logged in user
 @api.get("/sign-out", tags=["auth"])
 def sign_out():
     try:
@@ -78,11 +80,11 @@ def sign_out():
         print("Error: ", e)
         return {"message": "User could not be signed out"}
     
-
+# Retrieves all the data of the logged in user
 @api.get("/retrieve-user", tags=["auth"])
 def user_data():
     try:
-        response = supabase.auth.get_user() # need to convert output to JSON for access to email
+        response = supabase.auth.get_user() 
         print(response.user.id)
         if response:
             return {"message": f"{response}"} 
@@ -91,11 +93,12 @@ def user_data():
     except Exception as e:
         print("Error: ", e)
         return {"message": e}
-    
+
+# Gets logged in user's id    
 @api.get("/retrieve-user-id", tags=["auth"])
 def user_id():
     try:
-        response = supabase.auth.get_user() # need to convert output to JSON for access to email
+        response = supabase.auth.get_user() 
 
         if response:
             return {"message": f"{response.user.id}"} 
@@ -104,11 +107,12 @@ def user_id():
     except Exception as e:
         print("Error: ", e)
         return {"message": e}
-    
+
+# Gets logged in user's email
 @api.get("/retrieve-user-email", tags=["auth"])
 def user_id():
     try:
-        response = supabase.auth.get_user() # need to convert output to JSON for access to email
+        response = supabase.auth.get_user() 
 
         if response:
             return {"message": f"{response.user.email}"} 

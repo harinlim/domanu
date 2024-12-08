@@ -4,6 +4,7 @@ from app.config import api, url, secret_key
 api_url: str = url
 key: str = secret_key
 
+# Creates client for running supabase commands
 def create_supabase_client():
     supabase: Client = create_client(url, secret_key)
     return supabase

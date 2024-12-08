@@ -2,6 +2,7 @@ import uuid
 from pydantic import BaseModel
 from typing import Optional
 
+authors = ["Chiara Sabato"]
 
 class User(BaseModel):
     email: str
@@ -13,12 +14,14 @@ class Profile(BaseModel):
     last: str
     username: str
 
+
 class Marketplace(BaseModel):
     name: str
     description: str
     bidding: bool
     bargaining: bool
     private: bool
+
 
 class Services(BaseModel):
     name: str
