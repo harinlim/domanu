@@ -46,6 +46,7 @@ export function SignupForm() {
     if (result.success) {
       setError('')
       router.push('/')
+      window.location.replace('/')
       return
     }
 
