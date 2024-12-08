@@ -66,10 +66,4 @@ The `Services` database is where all actual services created by users will be st
 
 `get_services` will return all the services associated with a user.
 
-`update_service_name` will allow a user to update the name of services they own.
-
-`update_service_description` will allow a user to update the description of a service they own.
-
-`update_service_price` will allow a user to update the price of a service they own.
-
 `delete service` allows a user to delete services they are the owner of.
