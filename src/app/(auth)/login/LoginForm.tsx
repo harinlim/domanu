@@ -7,17 +7,12 @@ import {
   Group,
   Button,
   Alert,
-  Anchor,
-  Box,
   Text,
 } from '@mantine/core'
 import { useForm, zodResolver } from '@mantine/form'
 import { IconAlertCircle } from '@tabler/icons-react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-// import { signup } from '../actions'
 import { signupSchema } from '../schemas'
 import { login } from '../actions'
 
@@ -36,15 +31,14 @@ export function LoginForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
 
-  const router = useRouter()
-
   const handleSubmit = form.onSubmit(async values => {
     setIsSubmitting(true)
     const result = await login(values)
 
     if (result.success) {
       setError('')
-      router.push('/')
+      // Reset page to reload layout - using router reloads client-side and doesn't reset layout
+      window.location.replace('/')
       return
     }
 

@@ -3,7 +3,6 @@
 import React from 'react'
 import { AppShell, AppShellMain, Grid, Title, Space, Image, Text } from '@mantine/core'
 import '@mantine/core/styles.css'
-import Header from '../../../components/Header'
 
 function Item1() {
   return (

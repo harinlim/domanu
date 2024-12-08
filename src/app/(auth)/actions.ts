@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { loginSchema, signupSchema } from './schemas'
-
+import { revalidatePath, revalidateTag } from 'next/cache'
+import { redirect } from 'next/navigation'
 type LoginInput = z.infer<typeof loginSchema>
 type SignupInput = z.infer<typeof signupSchema>
 
@@ -87,4 +88,12 @@ export async function signup(values: SignupInput): Promise<AuthResponse> {
       error: 'An unexpected error occurred',
     }
   }
+}
+
+export async function signOut(): Promise<AuthResponse> {
+  const response = await fetch('/api/auth/sign-out', {
+    credentials: 'include',
+  })
+
+  return { success: true }
 }
