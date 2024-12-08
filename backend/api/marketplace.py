@@ -7,6 +7,7 @@ from backend.api.auth import user_id
 from backend.api.profiles import get_designer_value
 import uuid
 
+
 # Initialize supabase client
 supabase = create_supabase_client()
 
@@ -17,7 +18,7 @@ openapi_tags = {
     "description": "Modify and create marketplaces",
 }
 
-# Create a new user
+# Create a marketplace
 @api.post("/create-marketplace", tags=["marketplaces"])
 def create_marketplace(marketplace: Marketplace):
     try:
@@ -43,7 +44,7 @@ def create_marketplace(marketplace: Marketplace):
         print("Error: ", e)
         return {"message": e}
     
-
+# Retrieves marketplaces of logged in user
 @api.get("/get-marketplaces", tags=["marketplaces"])
 def get_marketplaces():
     try:
@@ -79,6 +80,7 @@ def get_marketplaces():
             "data": []
         }
 
+# Returns marketplace from id
 @api.get("/{marketplace_id}", tags=["marketplaces"])
 def get_marketplace(marketplace_id: int):
     try:
