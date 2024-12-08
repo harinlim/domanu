@@ -1,7 +1,7 @@
 import MarketplaceCard from "@/app/components/MarketplaceCard";
 import { Grid, Title, Space, Text } from "@mantine/core";
 import Image from "next/image";
-
+import { Profile } from "@/types/user";
 const reviews = [
   {
     title: 'Great seller!',
@@ -17,7 +17,8 @@ const reviews = [
   },
 ]
 
-export default function Profile() {
+export default function ProfilePage({ user }: { user: Profile }) {
+  console.log("hihi", user)
   return (
     <>
       <Grid>
@@ -34,8 +35,9 @@ export default function Profile() {
             </Grid.Col>
             <Grid.Col span={8}>
               <Title order={1} className="text-[#699B60]">
-                domanu123
+                {user.first} {user.last}
               </Title>
+              <Text size="lg" className="font-bold italic">@{user.username}</Text>
               <Space h="sm" />
               <Text size="lg">Hi! I'm a dummy user for Domanu.</Text>
             </Grid.Col>

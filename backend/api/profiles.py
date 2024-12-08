@@ -176,13 +176,15 @@ def get_user_profile():
 
         response = (
             supabase.table("profiles")
-            .select("first_name, last_name")
+            .select("*")
             .eq("id", id)
             .execute()
         )
 
+        profile = Profile(first=response.data[0]['first_name'], last=response.data[0]['last_name'], username=response.data[0]['username'])
+
         if response:
-            return {"message": f"{response.data[0]['first_name']} {response.data[0]['last_name']}"} 
+            return {"message": profile} 
         else:
             return {"message": "User could not be found"}
     except Exception as e:
