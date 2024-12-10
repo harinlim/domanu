@@ -1,0 +1,17 @@
+config:
+  target: 'http://localhost:3000/login'   # The target URL of your app or service
+  http:
+    insecureSSL: true               # Disable SSL validation for local testing
+  phases:
+    - duration: 60                   # Duration of the test in seconds
+      arrivalRate: 5                 # Number of new virtual users per second
+    - duration: 120
+      arrivalRate: 10
+
+scenarios:
+  - flow:
+      - post:
+          url: "/api/auth/sign-in"
+          json:
+            email: "somersseason@gmail.com"
+            password: "123456"

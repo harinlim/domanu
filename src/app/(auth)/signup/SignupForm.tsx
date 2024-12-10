@@ -81,6 +81,7 @@ export function SignupForm() {
         />
       )}
       <TextInput
+        name="email" // For testing
         label="Email"
         withAsterisk
         placeholder="Email@example.com"
@@ -88,6 +89,7 @@ export function SignupForm() {
         {...form.getInputProps('email')}
       />
       <TextInput
+        name="username"
         label="Username"
         withAsterisk
         placeholder="Username"
@@ -96,6 +98,7 @@ export function SignupForm() {
         {...form.getInputProps('username')}
       />
       <TextInput
+        name="first_name"
         label="First Name"
         withAsterisk
         placeholder="First Name"
@@ -104,6 +107,7 @@ export function SignupForm() {
         {...form.getInputProps('first_name')}
       />    
       <TextInput
+        name = "last_name"
         label="Last Name"
         withAsterisk
         placeholder="Last Name"
@@ -112,6 +116,7 @@ export function SignupForm() {
         {...form.getInputProps('last_name')}
       />
       <PasswordInput
+        name="password"
         label="Password"
         withAsterisk
         placeholder="Your password"
@@ -121,6 +126,7 @@ export function SignupForm() {
       />
       <Group justify="space-between" mt="lg">
         <Checkbox
+          name="terms"
           label="I accept terms and conditions"
           key={form.key('terms')}
           required
@@ -128,6 +134,7 @@ export function SignupForm() {
         />
       </Group>
       <Button
+        name="submit"
         type="submit"
         fullWidth
         mt="lg"

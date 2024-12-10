@@ -68,12 +68,14 @@ export function LoginForm() {
         />
       )}
       <TextInput
+        name="email"
         label="Email"
         placeholder="Your email"
         key={form.key('email')}
         {...form.getInputProps('email')}
       />
       <PasswordInput
+        name="password"
         label="Password"
         placeholder="Your password"
         key={form.key('password')}
@@ -82,6 +84,7 @@ export function LoginForm() {
       />
       <Group className="mt-5 justify-between">
         <Checkbox
+          name="remember"
           label="Remember me"
           key={form.key('remember')}
           {...form.getInputProps('remember')}
@@ -91,7 +94,7 @@ export function LoginForm() {
       Forgot password?
     </Anchor> */}
       </Group>
-      <Button type="submit" disabled={isSubmitting} className="mt-5 h-11 w-full bg-blue-600">
+      <Button name= "submit" type="submit" disabled={isSubmitting} className="mt-5 h-11 w-full bg-blue-600">
         <Text className="text-sm font-medium">Sign in</Text>
       </Button>
     </form>
